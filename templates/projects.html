@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - STEM Club</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        
+        .tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border: 2px solid var(--border-color);
+            background: var(--surface-color);
+            color: var(--text-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="nav-logo">
+                <span>🔬</span>
+                <span>STEM Club</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
+                <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+                <li><a href="{{ url_for('events') }}" class="nav-link">Events</a></li>
+                <li><a href="{{ url_for('projects') }}" class="nav-link">Projects</a></li>
+                <li><a href="{{ url_for('resources') }}" class="nav-link">Resources</a></li>
+                <li><a href="{{ url_for('gallery') }}" class="nav-link">Gallery</a></li>
+                <li><a href="{{ url_for('contact') }}" class="nav-link">Contact</a></li>
+                <li><a href="{{ url_for('faq') }}" class="nav-link">FAQ</a></li>
+                <li><a href="{{ url_for('admin') }}" class="nav-link">Admin</a></li>
+                <li><button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+            </ul>
+            
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="section section-alt text-center">
+        <div class="container">
+            <h1>Project Showcase</h1>
+            <p class="text-light">Explore amazing projects built by our members</p>
+        </div>
+    </section>
+
+    <!-- Filter Buttons -->
+    <section class="section">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
+                <button class="filter-btn" onclick="filterProjects('web')">Web Dev</button>
+                <button class="filter-btn" onclick="filterProjects('ai')">AI/ML</button>
+                <button class="filter-btn" onclick="filterProjects('robotics')">Robotics</button>
+                <button class="filter-btn" onclick="filterProjects('mobile')">Mobile</button>
+                <button class="filter-btn" onclick="filterProjects('hardware')">Hardware</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="card-grid" id="projectsGrid">
+                <div class="card project-card" data-category="web ai">
+                    <div class="project-image">🤖</div>
+                    <h3>AI Chatbot Platform</h3>
+                    <p class="text-light">Intelligent chatbot with natural language processing for customer support automation.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Flask</span>
+                    </div>
+                    <div class="flex gap-1 mt-2">
+                        <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 14px;">Demo</a>
+                        <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card project-card" data-category="robotics hardware">
+                    <div class="project-image">🚗</div>
+                    <h3>Autonomous Robot Car</h3>
+                    <p class="text-light">Self-driving robot using computer vision and sensor fusion for navigation.</p>
+                    <div class="project-tags">
+                        <span class="tag">Arduino</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">OpenCV</span>
+                    </div>
+                    <div class="flex gap-1 mt-2">
+                        <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 14px;">Demo</a>
+                        <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card project-card" data-category="web">
+                    <div class="project-image">📊</div>
+                    <h3>Data Visualization Dashboard</h3>
+                    <p class="text-light">Interactive dashboard for analyzing and visualizing complex datasets in real-time.</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">D3.js</span>
+                        <span class="tag">Node.js</span>
+                    </div>
+                    <div class="flex gap-1 mt-2">
+                        <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 14px;">Demo</a>
+                        <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card project-card" data-category="ai">
+                    <div class="project-image">🖼️</div>
+                    <h3>Image Recognition System</h3>
+                    <p class="text-light">Deep learning model for classifying and detecting objects in images with 95% accuracy.</p>
+                    <div class="project-tags">
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">CNN</span>
+                        <span class="tag">Python</span>
+                    </div>
+                    <div class="flex gap-1 mt-2">
+                        <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 14px;">Demo</a>
+                        <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card project-card" data-category="mobile">
+                    <div class="project-image">📱</div>
+                    <h3>Campus Navigation App</h3>
+                    <p class="text-light">Mobile app helping students navigate campus with real-time location and building info.</p>
+                    <div class="project-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Maps API</span>
+                    </div>
+                    <div class="flex gap-1 mt-2">
+                        <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 14px;">Demo</a>
+                        <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card project-card" data-category="hardware">
+                    <div class="project-image">🌡️</div>
+                    <h3>IoT Weather Station</h3>
+                    <p class="text-light">Smart weather monitoring system with cloud data logging and mobile alerts.</p>
+                    <div class="project-tags">
+                        <span class="tag">Raspberry Pi</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">IoT</span>
+                    </div>
+                    <div class="flex gap-1 mt-2">
+                        <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 14px;">Demo</a>
+                        <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card project-card" data-category="web">
+                    <div class="project-image">🎮</div>
+                    <h3>Multiplayer Game Platform</h3>
+                    <p class="text-light">Real-time multiplayer gaming platform with matchmaking and leaderboards.</p>
+                    <div class="project-tags">
+                        <span class="tag">WebSocket</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                    <div class="flex gap-1 mt-2">
+                        <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 14px;">Demo</a>
+                        <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card project-card" data-category="ai">
+                    <div class="project-image">🎵</div>
+                    <h3>Music Generation AI</h3>
+                    <p class="text-light">Neural network that composes original music in various genres using deep learning.</p>
+                    <div class="project-tags">
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">LSTM</span>
+                        <span class="tag">Music Theory</span>
+                    </div>
+                    <div class="flex gap-1 mt-2">
+                        <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 14px;">Demo</a>
+                        <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card project-card" data-category="robotics">
+                    <div class="project-image">🦾</div>
+                    <h3>Robotic Arm Controller</h3>
+                    <p class="text-light">Precision robotic arm with gesture control using computer vision and motion tracking.</p>
+                    <div class="project-tags">
+                        <span class="tag">Arduino</span>
+                        <span class="tag">Servo Motors</span>
+                        <span class="tag">OpenCV</span>
+                    </div>
+                    <div class="flex gap-1 mt-2">
+                        <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 14px;">Demo</a>
+                        <a href="#" class="btn btn-outline" style="padding: 8px 16px; font-size: 14px;">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit Project CTA -->
+    <section class="section section-alt text-center">
+        <div class="container">
+            <h2>Have a Project to Share?</h2>
+            <p class="text-light mb-2">Submit your project to be featured in our showcase!</p>
+            <a href="{{ url_for('contact') }}" class="btn btn-primary">Submit Project</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section text-center" style="background: var(--surface-color); padding: 30px 20px;">
+        <p>&copy; 2026 STEM Club. All rights reserved.</p>
+        <p class="text-light">Building the future, one innovation at a time.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script>
+        function filterProjects(category) {
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter projects
+            const projects = document.querySelectorAll('.project-card');
+            projects.forEach(project => {
+                if (category === 'all') {
+                    project.style.display = 'block';
+                } else {
+                    const categories = project.getAttribute('data-category');
+                    if (categories && categories.includes(category)) {
+                        project.style.display = 'block';
+                    } else {
+                        project.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

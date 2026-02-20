@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - STEM Club</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="nav-logo">
+                <span>🔬</span>
+                <span>STEM Club</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
+                <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+                <li><a href="{{ url_for('events') }}" class="nav-link">Events</a></li>
+                <li><a href="{{ url_for('projects') }}" class="nav-link">Projects</a></li>
+                <li><a href="{{ url_for('resources') }}" class="nav-link">Resources</a></li>
+                <li><a href="{{ url_for('gallery') }}" class="nav-link">Gallery</a></li>
+                <li><a href="{{ url_for('contact') }}" class="nav-link">Contact</a></li>
+                <li><a href="{{ url_for('faq') }}" class="nav-link">FAQ</a></li>
+                <li><a href="{{ url_for('admin') }}" class="nav-link">Admin</a></li>
+                <li><button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+            </ul>
+            
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="section section-alt text-center">
+        <div class="container">
+            <h1>Get in Touch</h1>
+            <p class="text-light">Questions? Suggestions? We'd love to hear from you!</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                <!-- Contact Form -->
+                <div>
+                    <div class="card">
+                        <h2 class="mb-2">Send us a Message</h2>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" placeholder="Your name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" placeholder="your.email@example.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <select id="subject" required>
+                                    <option value="">Select a subject...</option>
+                                    <option value="General Inquiry">General Inquiry</option>
+                                    <option value="Join Club">Join the Club</option>
+                                    <option value="Event Question">Event Question</option>
+                                    <option value="Project Submission">Project Submission</option>
+                                    <option value="Resource Suggestion">Resource Suggestion</option>
+                                    <option value="Feedback">Feedback</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" rows="6" placeholder="Tell us more..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </form>
+                        
+                        <div id="formMessage" style="display: none; margin-top: 15px;"></div>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <div class="card mb-2">
+                        <h3 class="mb-2">Contact Information</h3>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="font-size: 24px;">📧</p>
+                            <strong>Email</strong>
+                            <p class="text-light">stemclub@university.edu</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="font-size: 24px;">📍</p>
+                            <strong>Location</strong>
+                            <p class="text-light">Engineering Building, Room 201<br>University Campus</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <p style="font-size: 24px;">⏰</p>
+                            <strong>Meeting Times</strong>
+                            <p class="text-light">Tuesday & Thursday<br>4:00 PM - 6:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="mb-2">Follow Us</h3>
+                        <div style="display: flex; gap: 15px; font-size: 30px;">
+                            <a href="#" style="color: var(--text-color);">💬</a>
+                            <a href="#" style="color: var(--text-color);">📘</a>
+                            <a href="#" style="color: var(--text-color);">📷</a>
+                            <a href="#" style="color: var(--text-color);">🐦</a>
+                            <a href="#" style="color: var(--text-color);">💼</a>
+                        </div>
+                        <p class="text-light mt-2">Stay connected with us on social media for updates, photos, and announcements!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Officers Section -->
+    <section class="section section-alt">
+        <div class="container text-center">
+            <h2 class="mb-3">Contact Our Officers</h2>
+            <div class="card-grid">
+                <div class="card text-center">
+                    <div style="width: 80px; height: 80px; background: var(--primary-color); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 35px;">
+                        👨‍💼
+                    </div>
+                    <h3>John Doe</h3>
+                    <p class="text-primary">President</p>
+                    <p class="text-light" style="font-size: 14px;">john.doe@university.edu</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div style="width: 80px; height: 80px; background: var(--secondary-color); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 35px;">
+                        👩‍💼
+                    </div>
+                    <h3>Jane Smith</h3>
+                    <p class="text-primary">Vice President</p>
+                    <p class="text-light" style="font-size: 14px;">jane.smith@university.edu</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div style="width: 80px; height: 80px; background: var(--accent-color); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 35px;">
+                        👨‍🔬
+                    </div>
+                    <h3>Mike Johnson</h3>
+                    <p class="text-primary">Technical Lead</p>
+                    <p class="text-light" style="font-size: 14px;">mike.johnson@university.edu</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section text-center" style="background: var(--surface-color); padding: 30px 20px;">
+        <p>&copy; 2026 STEM Club. All rights reserved.</p>
+        <p class="text-light">Building the future, one innovation at a time.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+    
+    <script src="{{ url_for('static', filename='js/firebase-config.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+            
+            if (!name || !email || !subject || !message) {
+                FirebaseUtils.showMessage('formMessage', 'Please fill in all fields', 'error');
+                return;
+            }
+            
+            if (!FirebaseUtils.validateEmail(email)) {
+                FirebaseUtils.showMessage('formMessage', 'Please enter a valid email', 'error');
+                return;
+            }
+            
+            try {
+                const timestamp = new Date().toISOString();
+                
+                if (window.db) {
+                    await window.db.ref('messages').push({
+                        name,
+                        email,
+                        subject,
+                        message,
+                        timestamp,
+                        status: 'unread'
+                    });
+                    
+                    FirebaseUtils.showMessage('formMessage', '✓ Message sent successfully! We\'ll get back to you soon.', 'success');
+                    document.getElementById('contactForm').reset();
+                } else {
+                    // Fallback to mailto if Firebase not configured
+                    const mailtoLink = `mailto:stemclub@university.edu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+                    window.location.href = mailtoLink;
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                FirebaseUtils.showMessage('formMessage', 'Error sending message. Please try again or email us directly.', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - STEM Club</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="nav-logo">
+                <span>🔬</span>
+                <span>STEM Club</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
+                <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+                <li><a href="{{ url_for('events') }}" class="nav-link">Events</a></li>
+                <li><a href="{{ url_for('projects') }}" class="nav-link">Projects</a></li>
+                <li><a href="{{ url_for('resources') }}" class="nav-link">Resources</a></li>
+                <li><a href="{{ url_for('gallery') }}" class="nav-link">Gallery</a></li>
+                <li><a href="{{ url_for('contact') }}" class="nav-link">Contact</a></li>
+                <li><a href="{{ url_for('faq') }}" class="nav-link">FAQ</a></li>
+                <li><a href="{{ url_for('admin') }}" class="nav-link">Admin</a></li>
+                <li><button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+            </ul>
+            
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="section section-alt text-center">
+        <div class="container">
+            <h1>About STEM Club</h1>
+            <p class="text-light">Learn more about our mission, history, and the people behind the club</p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">Our Story</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <p>
+                    Founded in 2020, STEM Club began with a small group of passionate students who wanted to create 
+                    a community where innovation and learning in science, technology, engineering, and mathematics 
+                    could thrive. What started as informal meet-ups has grown into a vibrant organization with over 
+                    150 active members.
+                </p>
+                <p class="mt-2">
+                    Our club has evolved from simple coding sessions to hosting major competitions, workshops with 
+                    industry professionals, and collaborative projects that have real-world impact. We believe that 
+                    every student has the potential to make a difference through STEM, and we're here to provide the 
+                    resources, support, and community to make that happen.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="text-center mb-3">Leadership Team</h2>
+            <div class="card-grid">
+                <div class="card text-center">
+                    <div style="width: 100px; height: 100px; background: var(--primary-color); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px;">
+                        👨‍💼
+                    </div>
+                    <h3>John Doe</h3>
+                    <p class="text-primary">President</p>
+                    <p class="text-light">Computer Science Major<br>Specializes in AI and Machine Learning</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div style="width: 100px; height: 100px; background: var(--secondary-color); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px;">
+                        👩‍💼
+                    </div>
+                    <h3>Jane Smith</h3>
+                    <p class="text-primary">Vice President</p>
+                    <p class="text-light">Engineering Major<br>Passionate about Robotics</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div style="width: 100px; height: 100px; background: var(--accent-color); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px;">
+                        👨‍🔬
+                    </div>
+                    <h3>Mike Johnson</h3>
+                    <p class="text-primary">Technical Lead</p>
+                    <p class="text-light">Mathematics Major<br>Full-Stack Developer</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div style="width: 100px; height: 100px; background: var(--primary-color); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px;">
+                        👩‍🔬
+                    </div>
+                    <h3>Sarah Williams</h3>
+                    <p class="text-primary">Events Coordinator</p>
+                    <p class="text-light">Biology Major<br>Data Science Enthusiast</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">Our Values</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>🌟 Innovation</h3>
+                    <p>We encourage creative thinking and novel solutions to real-world problems.</p>
+                </div>
+                <div class="card">
+                    <h3>🤝 Collaboration</h3>
+                    <p>We believe the best results come from working together and sharing knowledge.</p>
+                </div>
+                <div class="card">
+                    <h3>📚 Continuous Learning</h3>
+                    <p>We promote lifelong learning and staying current with emerging technologies.</p>
+                </div>
+                <div class="card">
+                    <h3>🌍 Impact</h3>
+                    <p>We strive to make a positive difference in our community and beyond.</p>
+                </div>
+                <div class="card">
+                    <h3>🎯 Excellence</h3>
+                    <p>We set high standards and support each other in achieving our goals.</p>
+                </div>
+                <div class="card">
+                    <h3>💡 Inclusivity</h3>
+                    <p>We welcome all students regardless of background or experience level.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Us -->
+    <section class="section section-alt text-center">
+        <div class="container">
+            <h2>Ready to Join Us?</h2>
+            <p class="text-light mb-2">Become part of a community that's shaping the future</p>
+            <div class="flex-center gap-2 flex-wrap">
+                <a href="{{ url_for('contact') }}" class="btn btn-primary">Get in Touch</a>
+                <a href="{{ url_for('events') }}" class="btn btn-secondary">View Upcoming Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section text-center" style="background: var(--surface-color); padding: 30px 20px;">
+        <p>&copy; 2026 STEM Club. All rights reserved.</p>
+        <p class="text-light">Building the future, one innovation at a time.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+</body>
+</html>

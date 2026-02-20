@@ -1,0 +1,11 @@
+# Flask Web Framework
+Flask==3.0.0
+
+# Firebase Admin SDK (if needed for backend operations)
+# firebase-admin==6.3.0
+
+# Production server (optional)
+gunicorn==21.2.0
+
+# Environment variables management
+python-dotenv==1.0.0

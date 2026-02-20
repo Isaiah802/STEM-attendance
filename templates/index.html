@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM Club - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="nav-logo">
+                <span>🔬</span>
+                <span>STEM Club</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
+                <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+                <li><a href="{{ url_for('events') }}" class="nav-link">Events</a></li>
+                <li><a href="{{ url_for('projects') }}" class="nav-link">Projects</a></li>
+                <li><a href="{{ url_for('resources') }}" class="nav-link">Resources</a></li>
+                <li><a href="{{ url_for('gallery') }}" class="nav-link">Gallery</a></li>
+                <li><a href="{{ url_for('contact') }}" class="nav-link">Contact</a></li>
+                <li><a href="{{ url_for('faq') }}" class="nav-link">FAQ</a></li>
+                <li><a href="{{ url_for('admin') }}" class="nav-link">Admin</a></li>
+                <li><button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+            </ul>
+            
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade-in">Welcome to STEM Club</h1>
+            <p class="fade-in">Empowering students through Science, Technology, Engineering, and Mathematics</p>
+            <div class="flex-center gap-2 flex-wrap">
+                <a href="#attendance" class="btn btn-primary">Sign In</a>
+                <a href="{{ url_for('events') }}" class="btn btn-outline">View Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="section">
+        <div class="container text-center">
+            <h2>Our Mission</h2>
+            <p class="text-light" style="max-width: 800px; margin: 20px auto;">
+                We are dedicated to fostering innovation, collaboration, and excellence in STEM fields. 
+                Through workshops, competitions, and hands-on projects, we provide students with opportunities 
+                to develop skills, explore interests, and make meaningful connections in the STEM community.
+            </p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="text-center mb-3">What We Offer</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>🎓 Workshops</h3>
+                    <p>Regular hands-on workshops covering programming, robotics, electronics, and more.</p>
+                </div>
+                <div class="card">
+                    <h3>🏆 Competitions</h3>
+                    <p>Participate in hackathons, science fairs, and coding challenges locally and nationally.</p>
+                </div>
+                <div class="card">
+                    <h3>🚀 Projects</h3>
+                    <p>Work on real-world projects and build your portfolio with guidance from mentors.</p>
+                </div>
+                <div class="card">
+                    <h3>🤝 Networking</h3>
+                    <p>Connect with industry professionals, alumni, and fellow STEM enthusiasts.</p>
+                </div>
+                <div class="card">
+                    <h3>📚 Resources</h3>
+                    <p>Access tutorials, code samples, and learning materials curated by our members.</p>
+                </div>
+                <div class="card">
+                    <h3>🎯 Mentorship</h3>
+                    <p>Get guidance from experienced students and professionals in your areas of interest.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attendance Section -->
+    <section id="attendance" class="section">
+        <div class="container">
+            <div class="container-small">
+                <h2 class="text-center">Meeting Sign-In</h2>
+                <p class="text-center text-light mb-2">Record your attendance for today's meeting</p>
+                
+                <form id="attendanceForm">
+                    <div class="form-group">
+                        <label for="studentName">Full Name</label>
+                        <input type="text" id="studentName" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="studentID">Student ID</label>
+                        <input type="text" id="studentID" placeholder="Enter your student ID" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="studentEmail">Email</label>
+                        <input type="email" id="studentEmail" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+                </form>
+                
+                <div id="message" style="display: none; margin-top: 15px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section section-alt">
+        <div class="container text-center">
+            <h2 class="mb-3">By The Numbers</h2>
+            <div class="card-grid">
+                <div class="card text-center">
+                    <h1 class="text-primary">150+</h1>
+                    <p>Active Members</p>
+                </div>
+                <div class="card text-center">
+                    <h1 class="text-primary">50+</h1>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="card text-center">
+                    <h1 class="text-primary">20+</h1>
+                    <p>Workshops Held</p>
+                </div>
+                <div class="card text-center">
+                    <h1 class="text-primary">10+</h1>
+                    <p>Competition Wins</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section text-center" style="background: var(--surface-color); padding: 30px 20px;">
+        <p>&copy; 2026 STEM Club. All rights reserved.</p>
+        <p class="text-light">Building the future, one innovation at a time.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="{{ url_for('static', filename='js/firebase-config.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

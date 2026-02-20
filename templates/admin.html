@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - STEM Club</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .chart-container {
+            background: var(--surface-color);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .tab-container {
+            margin-bottom: 30px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab:hover {
+            color: var(--primary-color);
+        }
+        
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="nav-logo">
+                <span>🔬</span>
+                <span>STEM Club</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
+                <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+                <li><a href="{{ url_for('events') }}" class="nav-link">Events</a></li>
+                <li><a href="{{ url_for('projects') }}" class="nav-link">Projects</a></li>
+                <li><a href="{{ url_for('resources') }}" class="nav-link">Resources</a></li>
+                <li><a href="{{ url_for('gallery') }}" class="nav-link">Gallery</a></li>
+                <li><a href="{{ url_for('contact') }}" class="nav-link">Contact</a></li>
+                <li><a href="{{ url_for('faq') }}" class="nav-link">FAQ</a></li>
+                <li><a href="{{ url_for('admin') }}" class="nav-link">Admin</a></li>
+                <li><button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
+            </ul>
+            
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="flex-between flex-wrap gap-2">
+                <div>
+                    <h1>Admin Dashboard</h1>
+                    <p class="text-light">Monitor club activities and manage data</p>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="exportData('attendance')">📥 Export Attendance</button>
+                    <button class="btn btn-secondary" onclick="exportData('rsvps')">📥 Export RSVPs</button>
+                    <button class="btn btn-outline" onclick="exportData('messages')">📥 Export Messages</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Dashboard -->
+    <section class="section">
+        <div class="container">
+            <h2 class="mb-2">Overview</h2>
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Members</div>
+                    <div class="stat-number" id="totalMembers">0</div>
+                    <div class="stat-label">All-time attendance records</div>
+                </div>
+                
+                <div class="stat-card" style="background: linear-gradient(135deg, #FF9800, #F44336);">
+                    <div class="stat-label">This Month</div>
+                    <div class="stat-number" id="monthlyAttendance">0</div>
+                    <div class="stat-label">Attendance records</div>
+                </div>
+                
+                <div class="stat-card" style="background: linear-gradient(135deg, #9C27B0, #E91E63);">
+                    <div class="stat-label">Event RSVPs</div>
+                    <div class="stat-number" id="totalRSVPs">0</div>
+                    <div class="stat-label">Active registrations</div>
+                </div>
+                
+                <div class="stat-card" style="background: linear-gradient(135deg, #00BCD4, #03A9F4);">
+                    <div class="stat-label">Messages</div>
+                    <div class="stat-number" id="totalMessages">0</div>
+                    <div class="stat-label">Unread messages</div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="chart-container">
+                <h3 class="mb-2">Attendance Trend (Last 7 Days)</h3>
+                <canvas id="attendanceChart"></canvas>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px;">
+                <div class="chart-container">
+                    <h3 class="mb-2">Attendance by Day</h3>
+                    <canvas id="dayChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 class="mb-2">Event Popularity</h3>
+                    <canvas id="eventsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabs Section -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="tab-container">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('attendance')">📋 Attendance Records</button>
+                    <button class="tab" onclick="switchTab('rsvps')">🎟️ Event RSVPs</button>
+                    <button class="tab" onclick="switchTab('messages')">💬 Messages</button>
+                </div>
+
+                <!-- Attendance Tab -->
+                <div id="attendance-tab" class="tab-content active">
+                    <div class="card">
+                        <h3 class="mb-2">Attendance Records</h3>
+                        <input type="text" id="searchAttendance" placeholder="🔍 Search by name, ID, or email..." style="margin-bottom: 15px;" onkeyup="searchTable('attendanceTable', this.value)">
+                        <div style="overflow-x: auto;">
+                            <table id="attendanceTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Student ID</th>
+                                        <th>Email</th>
+                                        <th>Timestamp</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <p id="attendanceCount" class="text-light mt-2">Loading...</p>
+                    </div>
+                </div>
+
+                <!-- RSVPs Tab -->
+                <div id="rsvps-tab" class="tab-content">
+                    <div class="card">
+                        <h3 class="mb-2">Event RSVPs</h3>
+                        <input type="text" id="searchRSVPs" placeholder="🔍 Search RSVPs..." style="margin-bottom: 15px;" onkeyup="searchTable('rsvpsTable', this.value)">
+                        <div style="overflow-x: auto;">
+                            <table id="rsvpsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Event</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Timestamp</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <p id="rsvpCount" class="text-light mt-2">Loading...</p>
+                    </div>
+                </div>
+
+                <!-- Messages Tab -->
+                <div id="messages-tab" class="tab-content">
+                    <div class="card">
+                        <h3 class="mb-2">Contact Messages</h3>
+                        <input type="text" id="searchMessages" placeholder="🔍 Search messages..." style="margin-bottom: 15px;" onkeyup="searchTable('messagesTable', this.value)">
+                        <div style="overflow-x: auto;">
+                            <table id="messagesTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Subject</th>
+                                        <th>Message</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <p id="messageCount" class="text-light mt-2">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section text-center" style="background: var(--surface-color); padding: 30px 20px;">
+        <p>&copy; 2026 STEM Club. All rights reserved.</p>
+        <p class="text-light">Building the future, one innovation at a time.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+    
+    <script src="{{ url_for('static', filename='js/firebase-config.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>
+            });
+        });
+    </script>
+</body>
+</html>
