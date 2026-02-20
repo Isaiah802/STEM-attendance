@@ -1,13 +1,15 @@
 // Firebase Configuration
+// Project: stem-c0eca
+// Status: ✅ CONFIGURED
 const firebaseConfig = {
-    // COPY YOUR FIREBASE CONFIG FROM FIREBASE CONSOLE
-    // apiKey: "YOUR_API_KEY",
-    // authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    // databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-    // projectId: "YOUR_PROJECT_ID",
-    // storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    // messagingSenderId: "YOUR_SENDER_ID",
-    // appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyB3Xvff2ZbvA265_UTaAV64fAb6TrN4CRE",
+    authDomain: "stem-c0eca.firebaseapp.com",
+    databaseURL: "https://stem-c0eca-default-rtdb.firebaseio.com",
+    projectId: "stem-c0eca",
+    storageBucket: "stem-c0eca.firebasestorage.app",
+    messagingSenderId: "411986749465",
+    appId: "1:411986749465:web:46e1ab9c3cc1ca9bc62288",
+    measurementId: "G-8EVQVLETSB"
 };
 
 // Initialize Firebase

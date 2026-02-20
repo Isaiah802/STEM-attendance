@@ -34,25 +34,39 @@ templates = {
 
 def convert_flask_to_static(content):
     """Convert Flask template syntax to static paths"""
-    # Replace url_for for static files
-    content = content.replace("{{ url_for('static', filename='css/styles.css') }}", "/static/css/styles.css")
-    content = content.replace("{{ url_for('static', filename='js/app.js') }}", "/static/js/app.js")
-    content = content.replace("{{ url_for('static', filename='js/firebase-config.js') }}", "/static/js/firebase-config.js")
-    content = content.replace("{{ url_for('static', filename='js/theme.js') }}", "/static/js/theme.js")
-    content = content.replace("{{ url_for('static', filename='js/admin.js') }}", "/static/js/admin-secure.js")
-    content = content.replace("{{ url_for('static', filename='js/attendance.js') }}", "/static/js/attendance.js")
+    # Replace url_for for static files (relative paths for Firebase Hosting)
+    content = content.replace("{{ url_for('static', filename='css/styles.css') }}", "static/css/styles.css")
+    content = content.replace("{{ url_for('static', filename='js/app.js') }}", "static/js/app.js")
+    content = content.replace("{{ url_for('static', filename='js/firebase-config.js') }}", "static/js/firebase-config.js")
+    content = content.replace("{{ url_for('static', filename='js/theme.js') }}", "static/js/theme.js")
+    content = content.replace("{{ url_for('static', filename='js/admin.js') }}", "static/js/admin-secure.js")
+    content = content.replace("{{ url_for('static', filename='js/attendance.js') }}", "static/js/attendance.js")
     
     # Replace url_for for routes
-    content = content.replace("{{ url_for('index') }}", "/index.html")
-    content = content.replace("{{ url_for('attendance') }}", "/attendance.html")
-    content = content.replace("{{ url_for('about') }}", "/about.html")
-    content = content.replace("{{ url_for('events') }}", "/events.html")
-    content = content.replace("{{ url_for('projects') }}", "/projects.html")
-    content = content.replace("{{ url_for('resources') }}", "/resources.html")
-    content = content.replace("{{ url_for('gallery') }}", "/gallery.html")
-    content = content.replace("{{ url_for('contact') }}", "/contact.html")
-    content = content.replace("{{ url_for('faq') }}", "/faq.html")
-    content = content.replace("{{ url_for('admin') }}", "/admin.html")
+    content = content.replace("{{ url_for('index') }}", "index.html")
+    content = content.replace("{{ url_for('attendance') }}", "attendance.html")
+    content = content.replace("{{ url_for('about') }}", "about.html")
+    content = content.replace("{{ url_for('events') }}", "events.html")
+    content = content.replace("{{ url_for('projects') }}", "projects.html")
+    content = content.replace("{{ url_for('resources') }}", "resources.html")
+    content = content.replace("{{ url_for('gallery') }}", "gallery.html")
+    content = content.replace("{{ url_for('contact') }}", "contact.html")
+    content = content.replace("{{ url_for('faq') }}", "faq.html")
+    content = content.replace("{{ url_for('admin') }}", "admin.html")
+    
+    # Fix hardcoded absolute paths to relative paths for Firebase Hosting
+    content = content.replace('src="/static/', 'src="static/')
+    content = content.replace('href="/static/', 'href="static/')
+    content = content.replace('href="/index.html"', 'href="index.html"')
+    content = content.replace('href="/attendance.html"', 'href="attendance.html"')
+    content = content.replace('href="/about.html"', 'href="about.html"')
+    content = content.replace('href="/events.html"', 'href="events.html"')
+    content = content.replace('href="/projects.html"', 'href="projects.html"')
+    content = content.replace('href="/resources.html"', 'href="resources.html"')
+    content = content.replace('href="/gallery.html"', 'href="gallery.html"')
+    content = content.replace('href="/contact.html"', 'href="contact.html"')
+    content = content.replace('href="/faq.html"', 'href="faq.html"')
+    content = content.replace('href="/admin.html"', 'href="admin.html"')
     
     return content
 

@@ -14,7 +14,71 @@
         "email": {
           ".validate": "newData.isString() && newData.val().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$/)"
         },
+        "emailHash": {
+          ".validate": "newData.isString()"
+        },
+        "yearLevel": {
+          ".validate": "newData.isString()"
+        },
         "timestamp": {
+          ".validate": "newData.isString()"
+        },
+        "date": {
+          ".validate": "newData.isString()"
+        },
+        "userAgent": {
+          ".validate": "newData.isString()"
+        },
+        "ipAddress": {
+          ".validate": "newData.isString()"
+        }
+      }
+    },
+    "rsvps": {
+      ".read": true,
+      ".write": true,
+      "$eventId": {
+        "$record": {
+          ".validate": "newData.hasChildren(['name', 'email', 'timestamp'])",
+          "name": {
+            ".validate": "newData.isString() && newData.val().length > 0"
+          },
+          "email": {
+            ".validate": "newData.isString() && newData.val().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$/)"
+          },
+          "event": {
+            ".validate": "newData.isString()"
+          },
+          "guests": {
+            ".validate": "newData.isNumber()"
+          },
+          "timestamp": {
+            ".validate": "newData.isString()"
+          }
+        }
+      }
+    },
+    "messages": {
+      ".read": true,
+      ".write": true,
+      "$record": {
+        ".validate": "newData.hasChildren(['name', 'email', 'subject', 'message', 'timestamp'])",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "email": {
+          ".validate": "newData.isString() && newData.val().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$/)"
+        },
+        "subject": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "message": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "timestamp": {
+          ".validate": "newData.isString()"
+        },
+        "status": {
           ".validate": "newData.isString()"
         }
       }
