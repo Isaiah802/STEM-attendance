@@ -75,6 +75,7 @@
             
             <ul class="nav-menu">
                 <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
+                <li><a href="{{ url_for('attendance') }}" class="nav-link" style="background: var(--accent-color); color: white; padding: 8px 16px; border-radius: 8px; font-weight: bold;">📋 Sign In</a></li>
                 <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
                 <li><a href="{{ url_for('events') }}" class="nav-link">Events</a></li>
                 <li><a href="{{ url_for('projects') }}" class="nav-link">Projects</a></li>
@@ -82,7 +83,7 @@
                 <li><a href="{{ url_for('gallery') }}" class="nav-link">Gallery</a></li>
                 <li><a href="{{ url_for('contact') }}" class="nav-link">Contact</a></li>
                 <li><a href="{{ url_for('faq') }}" class="nav-link">FAQ</a></li>
-                <li><a href="{{ url_for('admin') }}" class="nav-link">Admin</a></li>
+                <li><a href="{{ url_for('admin') }}" class="nav-link" style="opacity: 0.6;">🔐 Admin</a></li>
                 <li><button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button></li>
             </ul>
             
