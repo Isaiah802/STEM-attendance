@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "STEM",
+    "public": "STEM/static",
     "ignore": [
       "firebase.json",
       "**/.*",
