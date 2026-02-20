@@ -84,8 +84,8 @@
     <!-- Header -->
     <section class="section section-alt text-center">
         <div class="container">
-            <h1>Frequently Asked Questions</h1>
-            <p class="text-light">Find answers to common questions about STEM Club</p>
+            <h1>❓ Frequently Asked Questions</h1>
+            <p class="text-light" style="max-width: 700px; margin: 0 auto;">Got questions? We've got answers! Find everything you need to know about joining, participating, and making the most of STEM Club.</p>
         </div>
     </section>
 
@@ -118,7 +118,7 @@
                     <span class="faq-icon">▼</span>
                 </div>
                 <div class="faq-answer">
-                    <p>We meet every Tuesday and Thursday from 4:00 PM to 6:00 PM in the Engineering Building, Room 201. Check our Events page for specific meeting topics and any schedule changes.</p>
+                    <p>Meeting times and locations vary by event and project. Check our <a href="{{ url_for('events') }}" style="color: var(--primary-color); font-weight: bold;">Events page</a> for the latest schedule including workshops, project work sessions, and general meetings.</p>
                 </div>
             </div>
 
@@ -128,7 +128,7 @@
                     <span class="faq-icon">▼</span>
                 </div>
                 <div class="faq-answer">
-                    <p>No! STEM Club is completely free to join. We're funded through the university and occasionally through sponsorships, so all our events, workshops, and resources are available at no cost.</p>
+                    <p>No! STEM Club is completely free to join and participate in. All our workshops, projects, and events are open to members at no cost.</p>
                 </div>
             </div>
 
@@ -138,7 +138,7 @@
                     <span class="faq-icon">▼</span>
                 </div>
                 <div class="faq-answer">
-                    <p>We host a variety of events including coding workshops, robotics competitions, guest speakers from industry, hackathons, study groups, project showcases, and social events. There's something for everyone!</p>
+                    <p>We host hands-on workshops covering programming, electronics, and robotics. Our flagship project this semester is the Solar UAV. We also organize social events to build community. Check the <a href="{{ url_for('events') }}" style="color: var(--primary-color); font-weight: bold;">Events page</a> for upcoming activities!</p>
                 </div>
             </div>
 
@@ -154,11 +154,11 @@
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Can I propose my own project or event?</span>
+                    <span>Can I propose my own project or workshop idea?</span>
                     <span class="faq-icon">▼</span>
                 </div>
                 <div class="faq-answer">
-                    <p>Absolutely! We encourage members to bring their ideas. You can submit project proposals through our Projects page or speak with any officer during a meeting. We love member-driven initiatives!</p>
+                    <p>Absolutely! We encourage members to bring their ideas. Reach out through our <a href="{{ url_for('contact') }}" style="color: var(--primary-color); font-weight: bold;">Contact page</a> or speak with any officer at a meeting. Member-driven initiatives help shape the club!</p>
                 </div>
             </div>
 
@@ -168,17 +168,17 @@
                     <span class="faq-icon">▼</span>
                 </div>
                 <div class="faq-answer">
-                    <p>There are many ways to get more involved: join a project team, volunteer to lead a workshop, help plan events, run for an officer position, or mentor newer members. Talk to our officers to learn about current opportunities!</p>
+                    <p>Join one of the four Solar UAV sub-teams (Mechanical, Electronics, Software, or Documentation), volunteer to lead a workshop, help plan events, or run for an officer position at elections. Contact us to learn about current opportunities!</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFAQ(this)">
-                    <span>Do you offer help with coursework?</span>
+                    <span>Do you offer help with coursework or studying?</span>
                     <span class="faq-icon">▼</span>
                 </div>
                 <div class="faq-answer">
-                    <p>While we don't provide formal tutoring, many members form study groups and help each other with coursework. We also maintain a resource library and organize peer learning sessions for common STEM courses.</p>
+                    <p>While we don't provide formal tutoring, many members form study groups and help each other. The skills you learn in workshops and projects often complement coursework. Check our <a href="{{ url_for('resources') }}" style="color: var(--primary-color); font-weight: bold;">Resources page</a> for learning materials!</p>
                 </div>
             </div>
 
@@ -188,7 +188,7 @@
                     <span class="faq-icon">▼</span>
                 </div>
                 <div class="faq-answer">
-                    <p>We send weekly email updates to all members. You can also check our Events page regularly, follow us on social media, or join our Discord server where we post real-time announcements and discussions.</p>
+                    <p>Fill out our <a href="{{ url_for('contact') }}" style="color: var(--primary-color); font-weight: bold;">Contact form</a> to get added to our mailing list. You can also check the <a href="{{ url_for('events') }}" style="color: var(--primary-color); font-weight: bold;">Events page</a> regularly for the latest schedule and announcements.</p>
                 </div>
             </div>
         </div>

@@ -272,6 +272,11 @@
                     <div class="admin-nav-item" onclick="switchView('rsvps')">🎟️ RSVPs</div>
                     <div class="admin-nav-item" onclick="switchView('messages')">💬 Messages</div>
                     <div class="admin-nav-item" onclick="switchView('security')">🛡️ Security</div>
+                    <!-- Role-specific tabs (shown based on login) -->
+                    <div class="admin-nav-item role-tab" id="presidentTab" style="display:none;" onclick="switchView('president')">👔 President Dashboard</div>
+                    <div class="admin-nav-item role-tab" id="vicepresidentTab" style="display:none;" onclick="switchView('vicepresident')">🤝 Vice President Dashboard</div>
+                    <div class="admin-nav-item role-tab" id="treasurerTab" style="display:none;" onclick="switchView('treasurer')">💰 Treasurer Dashboard</div>
+                    <div class="admin-nav-item role-tab" id="secretaryTab" style="display:none;" onclick="switchView('secretary')">📝 Secretary Dashboard</div>
                 </div>
             </div>
         </div>
@@ -477,6 +482,328 @@
                         <button class="btn btn-outline" onclick="downloadAuditLog()">📥 Download Audit Log</button>
                         <button class="btn btn-outline" style="background: #f44336; color: white; margin-left: 10px;" onclick="purgeOldData()">
                             🗑️ Purge Data Older Than 1 Year
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- President Dashboard -->
+            <div id="presidentView" class="dashboard-view">
+                <h2 class="mb-3">👔 President Dashboard</h2>
+                
+                <div class="security-panel" style="border-left-color: #2196F3;">
+                    <h3 class="mb-2">Leadership Overview</h3>
+                    <p class="text-light">As President, you oversee all club operations and strategic direction.</p>
+                    <div class="metric-grid mt-3">
+                        <div class="metric-card">
+                            <div>👥</div>
+                            <div class="metric-value" id="presidentActiveMembers">0</div>
+                            <div class="text-light">Active Members</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>📅</div>
+                            <div class="metric-value" id="presidentEvents">0</div>
+                            <div class="text-light">Events This Month</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #2196F3;">
+                    <h3 class="mb-2">🎯 Strategic Priorities</h3>
+                    <ul style="line-height: 2; color: var(--text-light);">
+                        <li>✅ Solar UAV Project - Monitor progress across 4 sub-teams</li>
+                        <li>✅ Officer Team Coordination - Ensure all positions are fulfilling duties</li>
+                        <li>✅ Club Constitution Compliance - Maintain adherence to bylaws</li>
+                        <li>✅ Member Engagement - Track attendance trends and participation</li>
+                        <li>✅ Strategic Planning - Set semester goals and long-term vision</li>
+                    </ul>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #2196F3;">
+                    <h3 class="mb-2">📊 Officer Performance Reports</h3>
+                    <p class="text-light mb-2">Review contributions from each officer:</p>
+                    <div style="background: var(--bg-color); padding: 20px; border-radius: 8px;">
+                        <div style="margin-bottom: 15px;">
+                            <strong>🤝 Vice President:</strong> <span class="text-light">Event coordination, project oversight</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong>💰 Treasurer:</strong> <span class="text-light">Budget management, expense tracking</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong>📝 Secretary:</strong> <span class="text-light">Meeting minutes, records maintenance</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #2196F3;">
+                    <h3 class="mb-2">🔔 Action Items</h3>
+                    <div style="background: var(--bg-color); padding: 15px; border-radius: 8px;">
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="presidentTask1">
+                            <span>Review and approve UAV project milestone reports</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="presidentTask2">
+                            <span>Schedule officer meeting for next week</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="presidentTask3">
+                            <span>Review contact form submissions and delegate responses</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="presidentTask4">
+                            <span>Prepare agenda for next general meeting</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vice President Dashboard -->
+            <div id="vicepresidentView" class="dashboard-view">
+                <h2 class="mb-3">🤝 Vice President Dashboard</h2>
+                
+                <div class="security-panel" style="border-left-color: #9C27B0;">
+                    <h3 class="mb-2">Event Coordination</h3>
+                    <p class="text-light">As Vice President, you coordinate events and assist the President.</p>
+                    <div class="metric-grid mt-3">
+                        <div class="metric-card">
+                            <div>📅</div>
+                            <div class="metric-value" id="vpUpcomingEvents">0</div>
+                            <div class="text-light">Upcoming Events</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>🎟️</div>
+                            <div class="metric-value" id="vpTotalRsvps">0</div>
+                            <div class="text-light">Total RSVPs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #9C27B0;">
+                    <h3 class="mb-2">🎯 Your Responsibilities</h3>
+                    <ul style="line-height: 2; color: var(--text-light);">
+                        <li>✅ Event Planning & Logistics - Workshops, socials, and competitions</li>
+                        <li>✅ RSVP Management - Monitor and follow up on event registrations</li>
+                        <li>✅ Workshop Coordination - Recruit speakers and prepare materials</li>
+                        <li>✅ Presidential Support - Step in to lead meetings when needed</li>
+                        <li>✅ Member Outreach - Engage with members for feedback and ideas</li>
+                    </ul>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #9C27B0;">
+                    <h3 class="mb-2">📋 Event Planning Checklist</h3>
+                    <div style="background: var(--bg-color); padding: 15px; border-radius: 8px;">
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="vpTask1">
+                            <span>Schedule next workshop date and book room</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="vpTask2">
+                            <span>Create RSVP form for upcoming social event</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="vpTask3">
+                            <span>Confirm UAV project team meeting times</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="vpTask4">
+                            <span>Send reminder email to RSVPed members 24hrs before event</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #9C27B0;">
+                    <h3 class="mb-2">📊 Event Performance</h3>
+                    <p class="text-light mb-2">Review recent event success metrics:</p>
+                    <div style="background: var(--bg-color); padding: 20px; border-radius: 8px;">
+                        <div style="margin-bottom: 15px;">
+                            <strong>Last Workshop:</strong> <span class="text-light">85% attendance rate</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong>RSVP Conversion:</strong> <span class="text-light">Average 78% show-up rate</span>
+                        </div>
+                        <div>
+                            <strong>Member Feedback:</strong> <span class="text-light">View in Messages tab</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Treasurer Dashboard -->
+            <div id="treasurerView" class="dashboard-view">
+                <h2 class="mb-3">💰 Treasurer Dashboard</h2>
+                
+                <div class="security-panel" style="border-left-color: #4CAF50;">
+                    <h3 class="mb-2">Financial Overview</h3>
+                    <p class="text-light">As Treasurer, you manage club finances and maintain budget records.</p>
+                    <div class="metric-grid mt-3">
+                        <div class="metric-card">
+                            <div>💵</div>
+                            <div class="metric-value">$0</div>
+                            <div class="text-light">Current Balance</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>📊</div>
+                            <div class="metric-value">$0</div>
+                            <div class="text-light">YTD Expenses</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #4CAF50;">
+                    <h3 class="mb-2">🎯 Your Responsibilities</h3>
+                    <ul style="line-height: 2; color: var(--text-light);">
+                        <li>✅ Budget Management - Track income and expenses</li>
+                        <li>✅ Financial Reports - Prepare monthly summaries for officers</li>
+                        <li>✅ UAV Project Budget - Monitor Solar UAV component costs</li>
+                        <li>✅ Reimbursements - Process member expense claims</li>
+                        <li>✅ Fundraising - Explore grants and sponsorship opportunities</li>
+                    </ul>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #4CAF50;">
+                    <h3 class="mb-2">📝 Budget Breakdown (Semester)</h3>
+                    <div style="background: var(--bg-color); padding: 20px; border-radius: 8px;">
+                        <div style="margin-bottom: 15px;">
+                            <strong>🚁 Solar UAV Project:</strong> 
+                            <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                <span class="text-light">Components, materials, testing</span>
+                                <span style="color: var(--primary-color); font-weight: bold;">$TBD</span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong>🛠️ Workshop Supplies:</strong>
+                            <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                <span class="text-light">Materials for hands-on sessions</span>
+                                <span style="color: var(--primary-color); font-weight: bold;">$TBD</span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong>🎉 Social Events:</strong>
+                            <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                <span class="text-light">Food, activities, venue</span>
+                                <span style="color: var(--primary-color); font-weight: bold;">$TBD</span>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>📢 Marketing & Outreach:</strong>
+                            <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                <span class="text-light">Promotional materials</span>
+                                <span style="color: var(--primary-color); font-weight: bold;">$TBD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #4CAF50;">
+                    <h3 class="mb-2">📋 Financial Action Items</h3>
+                    <div style="background: var(--bg-color); padding: 15px; border-radius: 8px;">
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="treasurerTask1">
+                            <span>Update monthly financial report for officer meeting</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="treasurerTask2">
+                            <span>Research grant opportunities for UAV project funding</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="treasurerTask3">
+                            <span>Track and log expenses from recent workshop</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="treasurerTask4">
+                            <span>Prepare budget proposal for next semester</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secretary Dashboard -->
+            <div id="secretaryView" class="dashboard-view">
+                <h2 class="mb-3">📝 Secretary Dashboard</h2>
+                
+                <div class="security-panel" style="border-left-color: #FF9800;">
+                    <h3 class="mb-2">Records & Documentation</h3>
+                    <p class="text-light">As Secretary, you maintain meeting minutes and organizational records.</p>
+                    <div class="metric-grid mt-3">
+                        <div class="metric-card">
+                            <div>📄</div>
+                            <div class="metric-value" id="secretaryMeetings">0</div>
+                            <div class="text-light">Meetings This Semester</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>💬</div>
+                            <div class="metric-value" id="secretaryMessages">0</div>
+                            <div class="text-light">Unread Messages</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #FF9800;">
+                    <h3 class="mb-2">🎯 Your Responsibilities</h3>
+                    <ul style="line-height: 2; color: var(--text-light);">
+                        <li>✅ Meeting Minutes - Document officer and general meetings</li>
+                        <li>✅ Attendance Records - Maintain accurate attendance database</li>
+                        <li>✅ Message Management - Review and respond to contact form submissions</li>
+                        <li>✅ Member Directory - Keep member contact list up to date</li>
+                        <li>✅ Document Archive - Organize club documents and records</li>
+                    </ul>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #FF9800;">
+                    <h3 class="mb-2">📊 Recent Meeting Summary</h3>
+                    <div style="background: var(--bg-color); padding: 20px; border-radius: 8px;">
+                        <div style="margin-bottom: 15px;">
+                            <strong>Last Meeting:</strong> <span class="text-light">Check Events page for date</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong>Attendees:</strong> <span class="text-light">View in Attendance tab</span>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <strong>Key Decisions:</strong> 
+                            <ul style="margin-top: 5px; color: var(--text-light);">
+                                <li>Solar UAV sub-team assignments finalized</li>
+                                <li>Next workshop topic selected by vote</li>
+                                <li>Social event date confirmed</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #FF9800;">
+                    <h3 class="mb-2">📋 Documentation Tasks</h3>
+                    <div style="background: var(--bg-color); padding: 15px; border-radius: 8px;">
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="secretaryTask1">
+                            <span>Write and distribute minutes from last meeting</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="secretaryTask2">
+                            <span>Respond to unread contact form messages</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <input type="checkbox" id="secretaryTask3">
+                            <span>Export attendance data for monthly report</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="secretaryTask4">
+                            <span>Update member directory with new sign-ins</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="security-panel" style="border-left-color: #FF9800;">
+                    <h3 class="mb-2">✉️ Message Templates</h3>
+                    <p class="text-light mb-2">Quick responses for common inquiries:</p>
+                    <div style="background: var(--bg-color); padding: 15px; border-radius: 8px;">
+                        <button class="btn btn-outline" style="margin-bottom: 10px; width: 100%;" onclick="copyTemplate('joining')">
+                            Copy "How to Join" Response
+                        </button>
+                        <button class="btn btn-outline" style="margin-bottom: 10px; width: 100%;" onclick="copyTemplate('meeting')">
+                            Copy "Meeting Times" Response
+                        </button>
+                        <button class="btn btn-outline" style="width: 100%;" onclick="copyTemplate('uav')">
+                            Copy "UAV Project Info" Response
                         </button>
                     </div>
                 </div>

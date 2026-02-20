@@ -86,10 +86,37 @@ function showDashboard() {
     document.getElementById('adminDashboard').classList.remove('hidden');
     document.getElementById('adminName').textContent = currentUser;
     
+    // Show role-specific tab based on login
+    hideAllRoleTabs();
+    if (currentUser === 'president') {
+        document.getElementById('presidentTab').style.display = 'flex';
+    } else if (currentUser === 'vicepresident') {
+        document.getElementById('vicepresidentTab').style.display = 'flex';
+    } else if (currentUser === 'treasurer') {
+        document.getElementById('treasurerTab').style.display = 'flex';
+    } else if (currentUser === 'secretary') {
+        document.getElementById('secretaryTab').style.display = 'flex';
+    }
+    // admin user sees all tabs
+    if (currentUser === 'admin') {
+        document.getElementById('presidentTab').style.display = 'flex';
+        document.getElementById('vicepresidentTab').style.display = 'flex';
+        document.getElementById('treasurerTab').style.display = 'flex';
+        document.getElementById('secretaryTab').style.display = 'flex';
+    }
+    
     // Load all data
     loadDashboardData();
     
     logAudit('DASHBOARD_ACCESS', 'Dashboard loaded');
+}
+
+// Hide all role tabs
+function hideAllRoleTabs() {
+    document.getElementById('presidentTab').style.display = 'none';
+    document.getElementById('vicepresidentTab').style.display = 'none';
+    document.getElementById('treasurerTab').style.display = 'none';
+    document.getElementById('secretaryTab').style.display = 'none';
 }
 
 // Logout
@@ -181,6 +208,59 @@ function updateOverview() {
     document.getElementById('loginAttempts').textContent = auditLog.filter(log => log.action.includes('LOGIN')).length;
     document.getElementById('dataAccesses').textContent = auditLog.length;
     document.getElementById('dataRecords').textContent = allData.attendance.length + allData.rsvps.length + allData.messages.length;
+    
+    // Update role-specific metrics
+    updateRoleMetrics();
+}
+
+// Update role-specific dashboard metrics
+function updateRoleMetrics() {
+    // President metrics
+    const presidentActiveMembers = document.getElementById('presidentActiveMembers');
+    if (presidentActiveMembers) {
+        const uniqueMembers = [...new Set(allData.attendance.map(a => a.email))].length;
+        presidentActiveMembers.textContent = uniqueMembers;
+    }
+    
+    const presidentEvents = document.getElementById('presidentEvents');
+    if (presidentEvents) {
+        // Count unique dates in current month
+        const now = new Date();
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
+        const eventsThisMonth = [...new Set(allData.attendance
+            .filter(a => {
+                const aDate = new Date(a.date);
+                return aDate.getMonth() === currentMonth && aDate.getFullYear() === currentYear;
+            })
+            .map(a => a.date))].length;
+        presidentEvents.textContent = eventsThisMonth;
+    }
+    
+    // VP metrics
+    const vpUpcomingEvents = document.getElementById('vpUpcomingEvents');
+    if (vpUpcomingEvents) {
+        // This would need to count from events database when implemented
+        vpUpcomingEvents.textContent = '0';
+    }
+    
+    const vpTotalRsvps = document.getElementById('vpTotalRsvps');
+    if (vpTotalRsvps) {
+        vpTotalRsvps.textContent = allData.rsvps.length;
+    }
+    
+    // Secretary metrics
+    const secretaryMeetings = document.getElementById('secretaryMeetings');
+    if (secretaryMeetings) {
+        const uniqueMeetingDates = [...new Set(allData.attendance.map(a => a.date))].length;
+        secretaryMeetings.textContent = uniqueMeetingDates;
+    }
+    
+    const secretaryMessages = document.getElementById('secretaryMessages');
+    if (secretaryMessages) {
+        const unread = allData.messages.filter(m => m.status === 'unread').length;
+        secretaryMessages.textContent = unread;
+    }
 }
 
 // Update data tables
@@ -534,4 +614,73 @@ function loadDemoData() {
     updateOverview();
     updateDataTables();
     createCharts();
+}
+
+// Copy message templates (for Secretary)
+function copyTemplate(templateType) {
+    const templates = {
+        'joining': `Hi [Name],
+
+Thanks for your interest in STEM Club! We're excited to have you join us.
+
+To get started:
+1. Attend any of our meetings (check the Events page for upcoming dates)
+2. Sign in using the attendance form on our website
+3. Join one of our project teams or workshop series
+
+Our current flagship project is the Solar UAV, and we're looking for members to join our Mechanical, Electronics, Software, and Documentation teams.
+
+Feel free to reach out if you have any questions!
+
+Best regards,
+STEM Club Officers`,
+        
+        'meeting': `Hi [Name],
+
+Thanks for reaching out!
+
+Our meeting times and locations vary by event and project. You can find our complete schedule on the Events page of our website: [Website URL]
+
+We host:
+- Workshop sessions (hands-on skill building)
+- Solar UAV project work sessions
+- General meetings and social events
+
+Sign up for our mailing list through the Contact page to receive notifications about upcoming meetings.
+
+Looking forward to seeing you!
+
+Best regards,
+STEM Club Officers`,
+        
+        'uav': `Hi [Name],
+
+Great question about our Solar UAV project!
+
+The Solar UAV is our flagship project this semester. We're building a solar-powered drone that will collect environmental data (air quality, temperature, humidity).
+
+We have 4 specialized teams:
+- 🔧 Mechanical Team: Design, 3D printing, assembly
+- ⚡ Electronics Team: Wiring, power systems, solar integration
+- 🧠 Software Team: Flight code, data analysis
+- 📝 Documentation Team: Progress tracking, reporting
+
+No prior experience is required - we'll train you! Check out the Projects page on our website for full details and technical specifications.
+
+Contact us to join a team!
+
+Best regards,
+STEM Club Officers`
+    };
+    
+    const template = templates[templateType];
+    if (template) {
+        navigator.clipboard.writeText(template).then(() => {
+            alert('Template copied to clipboard!');
+            logAudit('TEMPLATE_COPY', `Copied ${templateType} template`);
+        }).catch(err => {
+            console.error('Failed to copy template:', err);
+            alert('Failed to copy template. Please copy manually:\n\n' + template);
+        });
+    }
 }

@@ -156,137 +156,58 @@
     <!-- Header -->
     <section class="section section-alt text-center">
         <div class="container">
-            <h1>Photo Gallery</h1>
-            <p class="text-light">Moments from our meetings, workshops, and events</p>
+            <h1>📸 Photo Gallery</h1>
+            <p class="text-light" style="max-width: 700px; margin: 0 auto;">Memories from our workshops, meetings, and events. Help us build our collection by sharing your photos!</p>
         </div>
     </section>
 
     <!-- Category Filter -->
     <section class="section">
         <div class="container">
-            <div class="category-tabs">
-                <button class="category-tab active" onclick="filterGallery('all')">All</button>
-                <button class="category-tab" onclick="filterGallery('workshops')">Workshops</button>
-                <button class="category-tab" onclick="filterGallery('competitions')">Competitions</button>
-                <button class="category-tab" onclick="filterGallery('meetings')">Meetings</button>
-                <button class="category-tab" onclick="filterGallery('social')">Social Events</button>
-            </div>
-
-            <!-- Gallery Grid -->
-            <div class="gallery-grid" id="galleryGrid">
-                <div class="gallery-item" data-category="workshops" onclick="openLightbox(0)">
-                    <div class="gallery-image">🖥️</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">Web Dev Workshop</div>
-                        <div class="gallery-date">February 15, 2026</div>
-                    </div>
+            <!-- Empty State -->
+            <div style="text-align: center; padding: 60px 20px; max-width: 600px; margin: 0 auto;">
+                <div style="font-size: 80px; margin-bottom: 20px;">📷</div>
+                <h2 style="margin-bottom: 15px;">Building Our Gallery</h2>
+                <p class="text-light" style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px;">
+                    We're just getting started! As we host workshops, competitions, and social events throughout the semester, this page will showcase our club's journey.
+                </p>
+                <div style="background: var(--surface-color); padding: 30px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 30px;">
+                    <h3 style="margin-bottom: 15px;">📅 Upcoming Photo Opportunities</h3>
+                    <ul style="text-align: left; line-height: 2; color: var(--text-light);">
+                        <li>🚁 <strong>Solar UAV Project</strong> - Design, build, and test phases</li>
+                        <li>🛠️ <strong>Hands-On Workshops</strong> - Weekly skill-building sessions</li>
+                        <li>👥 <strong>Club Meetings</strong> - Team collaboration and presentations</li>
+                        <li>🎉 <strong>Social Events</strong> - Building community outside the lab</li>
+                    </ul>
                 </div>
-
-                <div class="gallery-item" data-category="competitions" onclick="openLightbox(1)">
-                    <div class="gallery-image">🏆</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">Hackathon Winners</div>
-                        <div class="gallery-date">January 20, 2026</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="meetings" onclick="openLightbox(2)">
-                    <div class="gallery-image">👥</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">Weekly Meeting</div>
-                        <div class="gallery-date">February 10, 2026</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="workshops" onclick="openLightbox(3)">
-                    <div class="gallery-image">🤖</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">Robotics Workshop</div>
-                        <div class="gallery-date">February 5, 2026</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="social" onclick="openLightbox(4)">
-                    <div class="gallery-image">🎉</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">Club Social</div>
-                        <div class="gallery-date">January 28, 2026</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="competitions" onclick="openLightbox(5)">
-                    <div class="gallery-image">💻</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">Coding Competition</div>
-                        <div class="gallery-date">January 15, 2026</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="workshops" onclick="openLightbox(6)">
-                    <div class="gallery-image">🧠</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">AI/ML Workshop</div>
-                        <div class="gallery-date">December 18, 2025</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="meetings" onclick="openLightbox(7)">
-                    <div class="gallery-image">📊</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">Project Presentations</div>
-                        <div class="gallery-date">December 10, 2025</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="social" onclick="openLightbox(8)">
-                    <div class="gallery-image">🍕</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">Pizza Night</div>
-                        <div class="gallery-date">November 30, 2025</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="workshops" onclick="openLightbox(9)">
-                    <div class="gallery-image">📱</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">Mobile Dev Workshop</div>
-                        <div class="gallery-date">November 20, 2025</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="competitions" onclick="openLightbox(10)">
-                    <div class="gallery-image">🎯</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">Science Fair</div>
-                        <div class="gallery-date">November 10, 2025</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" data-category="meetings" onclick="openLightbox(11)">
-                    <div class="gallery-image">🚀</div>
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">Kickoff Meeting</div>
-                        <div class="gallery-date">September 1, 2025</div>
-                    </div>
-                </div>
+                <a href="{{ url_for('contact') }}" class="btn btn-primary" style="font-size: 1.1rem; padding: 15px 40px;">Submit Event Photos</a>
             </div>
         </div>
     </section>
 
-    <!-- Upload CTA -->
-    <section class="section section-alt text-center">
-        <div class="container">
-            <h2>Share Your Photos</h2>
-            <p class="text-light mb-2">Have photos from our events? We'd love to feature them!</p>
-            <a href="{{ url_for('contact') }}" class="btn btn-primary">Submit Photos</a>
+    <!-- Photo Submission Info -->
+    <section class="section section-alt">
+        <div class="container" style="max-width: 800px;">
+            <h2 class="text-center mb-3">📸 Photo Submission Guidelines</h2>
+            <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">✨</div>
+                    <h4>High Quality</h4>
+                    <p class="text-light" style="font-size: 0.9rem;">Clear, well-lit photos that capture the moment</p>
+                </div>
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">👥</div>
+                    <h4>Member Consent</h4>
+                    <p class="text-light" style="font-size: 0.9rem;">Ensure everyone is comfortable being photographed</p>
+                </div>
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🏷️</div>
+                    <h4>Include Details</h4>
+                    <p class="text-light" style="font-size: 0.9rem;">Event name, date, and brief description</p>
+                </div>
+            </div>
         </div>
     </section>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close">&times;</span>
-        <div class="lightbox-content" id="lightboxContent"></div>
-    </div>
 
     <!-- Footer -->
     <footer class="section text-center" style="background: var(--surface-color); padding: 30px 20px;">
@@ -295,36 +216,5 @@
     </footer>
 
     <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
-    <script>
-        function filterGallery(category) {
-            // Update button states
-            document.querySelectorAll('.category-tab').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Filter gallery items
-            const items = document.querySelectorAll('.gallery-item');
-            items.forEach(item => {
-                if (category === 'all') {
-                    item.style.display = 'block';
-                } else {
-                    const itemCategory = item.getAttribute('data-category');
-                    item.style.display = itemCategory === category ? 'block' : 'none';
-                }
-            });
-        }
-        
-        function openLightbox(index) {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.add('active');
-            // In production, you would load the actual image here
-        }
-        
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
-        }
-    </script>
 </body>
 </html>

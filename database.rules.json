@@ -58,6 +58,34 @@
         }
       }
     },
+    "events": {
+      ".read": true,
+      ".write": true,
+      "$record": {
+        ".validate": "newData.hasChildren(['title', 'date'])",
+        "title": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "date": {
+          ".validate": "newData.isString()"
+        },
+        "time": {
+          ".validate": "newData.isString()"
+        },
+        "location": {
+          ".validate": "newData.isString()"
+        },
+        "description": {
+          ".validate": "newData.isString()"
+        },
+        "createdBy": {
+          ".validate": "newData.isString()"
+        },
+        "createdAt": {
+          ".validate": "newData.isString()"
+        }
+      }
+    },
     "messages": {
       ".read": true,
       ".write": true,
