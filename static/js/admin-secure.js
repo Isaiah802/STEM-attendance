@@ -1,8 +1,12 @@
 // Secure Admin Dashboard JavaScript
-// Password: stemadmin2026 (change this in production!)
+// OFFICER ACCESS ONLY - Based on NLC STEM Club Constitution
+// Default passwords - CHANGE THESE IN PRODUCTION!
 const ADMIN_CREDENTIALS = {
-    'admin': 'stemadmin2026',
-    'president': 'stem2026'
+    'president': 'nlcstem2026',
+    'vicepresident': 'nlcstem2026',
+    'treasurer': 'nlcstem2026',
+    'secretary': 'nlcstem2026',
+    'admin': 'stemadmin2026'  // Backup admin account
 };
 
 let currentUser = null;

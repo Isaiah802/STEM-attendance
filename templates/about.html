@@ -45,23 +45,75 @@
         </div>
     </section>
 
-    <!-- Our Story -->
+    <!-- Mission & Purpose -->
     <section class="section">
         <div class="container">
-            <h2 class="text-center mb-3">Our Story</h2>
+            <h2 class="text-center mb-3">Our Mission</h2>
             <div style="max-width: 800px; margin: 0 auto;">
-                <p>
-                    Founded in 2020, STEM Club began with a small group of passionate students who wanted to create 
-                    a community where innovation and learning in science, technology, engineering, and mathematics 
-                    could thrive. What started as informal meet-ups has grown into a vibrant organization with over 
-                    150 active members.
+                <p style="font-size: 1.1rem; text-align: center; font-weight: 500; color: var(--primary-color);">
+                    To foster a collaborative community that promotes innovation, learning, and professional development 
+                    in Science, Technology, Engineering, and Mathematics.
                 </p>
-                <p class="mt-2">
-                    Our club has evolved from simple coding sessions to hosting major competitions, workshops with 
-                    industry professionals, and collaborative projects that have real-world impact. We believe that 
-                    every student has the potential to make a difference through STEM, and we're here to provide the 
-                    resources, support, and community to make that happen.
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Purpose -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="text-center mb-3">What We Do</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>🎓 Educational Workshops</h3>
+                    <p class="text-light">Regular hands-on workshops covering programming, robotics, engineering design, and emerging technologies.</p>
+                </div>
+                <div class="card">
+                    <h3>🚀 Real-World Projects</h3>
+                    <p class="text-light">Work on meaningful interdisciplinary projects like our current Solar-Powered Environmental Monitoring UAV.</p>
+                </div>
+                <div class="card">
+                    <h3>🏆 Competitions & Events</h3>
+                    <p class="text-light">Participate in hackathons, science fairs, and coding challenges at local and national levels.</p>
+                </div>
+                <div class="card">
+                    <h3>🤝 Professional Development</h3>
+                    <p class="text-light">Network with industry professionals, attend career workshops, and build your portfolio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Project Spotlight -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">🌟 Current Project: Solar-Powered UAV</h2>
+            <div style="max-width: 900px; margin: 0 auto; background: var(--surface-color); padding: 30px; border-radius: 12px; box-shadow: var(--shadow);">
+                <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                    We're building a <strong>Solar-Powered Environmental Monitoring UAV</strong> – a hybrid drone that uses 
+                    solar energy to extend flight time and collect real-time environmental data including air quality, 
+                    temperature, and humidity.
                 </p>
+                <div class="card-grid" style="margin-top: 25px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--primary-color);">4-6 lbs</div>
+                        <div class="text-light">Target Weight</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--secondary-color);">15-25 min</div>
+                        <div class="text-light">Flight Time</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--accent-color);">4 Teams</div>
+                        <div class="text-light">Specialized Groups</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--primary-color);">10 Weeks</div>
+                        <div class="text-light">Project Timeline</div>
+                    </div>
+                </div>
+                <div style="margin-top: 25px;">
+                    <a href="{{ url_for('projects') }}" class="btn btn-primary">Learn More About the UAV Project →</a>
+                </div>
             </div>
         </div>
     </section>
@@ -69,33 +121,45 @@
     <!-- Leadership Team -->
     <section class="section section-alt">
         <div class="container">
-            <h2 class="text-center mb-3">Leadership Team</h2>
+            <h2 class="text-center mb-3">2025-2026 Officer Team</h2>
+            <p class="text-center text-light mb-3" style="max-width: 700px; margin-left: auto; margin-right: auto;">
+                Our officers are dedicated to creating an inclusive environment where all members can learn, grow, and contribute to meaningful STEM projects.
+            </p>
             <div class="card-grid">
                 <div class="card text-center">
                     <div style="width: 100px; height: 100px; background: var(--primary-color); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px;">
                         👨‍💼
                     </div>
-                    <h3>John Doe</h3>
-                    <p class="text-primary">President</p>
-                    <p class="text-light">Computer Science Major<br>Specializes in AI and Machine Learning</p>
+                    <h3>President</h3>
+                    <p class="text-primary">Chief Executive Officer</p>
+                    <p class="text-light" style="font-size: 0.9rem;">Leads club operations, represents the club to administration, and oversees all activities</p>
                 </div>
                 
                 <div class="card text-center">
                     <div style="width: 100px; height: 100px; background: var(--secondary-color); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px;">
                         👩‍💼
                     </div>
-                    <h3>Jane Smith</h3>
-                    <p class="text-primary">Vice President</p>
-                    <p class="text-light">Engineering Major<br>Passionate about Robotics</p>
+                    <h3>Vice President</h3>
+                    <p class="text-primary">Operations Manager</p>
+                    <p class="text-light" style="font-size: 0.9rem;">Assists the President and assumes duties when the President is unavailable</p>
                 </div>
                 
                 <div class="card text-center">
                     <div style="width: 100px; height: 100px; background: var(--accent-color); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px;">
-                        👨‍🔬
+                        💰
                     </div>
-                    <h3>Mike Johnson</h3>
-                    <p class="text-primary">Technical Lead</p>
-                    <p class="text-light">Mathematics Major<br>Full-Stack Developer</p>
+                    <h3>Treasurer</h3>
+                    <p class="text-primary">Financial Officer</p>
+                    <p class="text-light" style="font-size: 0.9rem;">Manages club finances, budgets, and fundraising activities</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div style="width: 100px; height: 100px; background: var(--primary-color); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 40px;">
+                        📝
+                    </div>
+                    <h3>Secretary</h3>
+                    <p class="text-primary">Records Keeper</p>
+                    <p class="text-light" style="font-size: 0.9rem;">Maintains meeting minutes, attendance records, and club communications</p>
                 </div>
                 
                 <div class="card text-center">

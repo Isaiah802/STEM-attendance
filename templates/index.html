@@ -53,16 +53,56 @@
     <section class="section">
         <div class="container text-center">
             <h2>Our Mission</h2>
-            <p class="text-light" style="max-width: 800px; margin: 20px auto;">
-                We are dedicated to fostering innovation, collaboration, and excellence in STEM fields. 
-                Through workshops, competitions, and hands-on projects, we provide students with opportunities 
-                to develop skills, explore interests, and make meaningful connections in the STEM community.
+            <p class="text-light" style="max-width: 800px; margin: 20px auto; font-size: 1.1rem;">
+                To foster a collaborative community that promotes innovation, learning, and professional development 
+                in Science, Technology, Engineering, and Mathematics.
             </p>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Featured Project -->
     <section class="section section-alt">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span style="background: var(--accent-color); color: white; padding: 8px 20px; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">🌟 CURRENT PROJECT</span>
+            </div>
+            <h2 class="text-center mb-3">Solar-Powered Environmental Monitoring UAV</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <p class="text-center text-light" style="font-size: 1.1rem; margin-bottom: 25px;">
+                    We're building a hybrid solar-powered drone to collect real-time environmental data. 
+                    Join one of our four specialized teams and contribute to this cutting-edge project!
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 25px;">
+                    <div class="card text-center" style="background: var(--surface-color);">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">🚁</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">4-6 lbs</div>
+                        <div class="text-light">Target Weight</div>
+                    </div>
+                    <div class="card text-center" style="background: var(--surface-color);">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">⏱️</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--secondary-color);">15-25 min</div>
+                        <div class="text-light">Flight Time</div>
+                    </div>
+                    <div class="card text-center" style="background: var(--surface-color);">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">👥</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--accent-color);">4 Teams</div>
+                        <div class="text-light">Join Today</div>
+                    </div>
+                    <div class="card text-center" style="background: var(--surface-color);">
+                        <div style="font-size: 2.5rem; margin-bottom: 10px;">📅</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">10 Weeks</div>
+                        <div class="text-light">Timeline</div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <a href="{{ url_for('projects') }}" class="btn btn-primary" style="font-size: 1.1rem;">Learn More About the UAV Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
         <div class="container">
             <h2 class="text-center mb-3">What We Offer</h2>
             <div class="card-grid">

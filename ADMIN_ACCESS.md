@@ -19,13 +19,27 @@ The admin dashboard is **password-protected** and only accessible to authorized 
 
 **⚠️ IMPORTANT: Change these passwords immediately in production!**
 
-**Account 1 - Primary Admin:**
+**Officer Accounts (Based on NLC STEM Club Constitution):**
+
+**Account 1 - President:**
+- **Username:** `president`
+- **Password:** `nlcstem2026`
+
+**Account 2 - Vice President:**
+- **Username:** `vicepresident`
+- **Password:** `nlcstem2026`
+
+**Account 3 - Treasurer:**
+- **Username:** `treasurer`
+- **Password:** `nlcstem2026`
+
+**Account 4 - Secretary:**
+- **Username:** `secretary`
+- **Password:** `nlcstem2026`
+
+**Backup Admin Account:**
 - **Username:** `admin`
 - **Password:** `stemadmin2026`
-
-**Account 2 - President Access:**
-- **Username:** `president`
-- **Password:** `stem2026`
 
 ### Changing Passwords
 
@@ -35,8 +49,11 @@ To update passwords for production use:
 2. Find the `ADMIN_CREDENTIALS` object at the top:
    ```javascript
    const ADMIN_CREDENTIALS = {
-       'admin': 'stemadmin2026',
-       'president': 'stem2026'
+       'president': 'nlcstem2026',
+       'vicepresident': 'nlcstem2026',
+       'treasurer': 'nlcstem2026',
+       'secretary': 'nlcstem2026',
+       'admin': 'stemadmin2026'
    };
    ```
 3. Change the passwords to strong, unique values
