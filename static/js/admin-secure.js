@@ -188,17 +188,30 @@ function updateDataTables() {
     // Attendance table
     const attendanceBody = document.getElementById('attendanceTableBody');
     if (allData.attendance.length === 0) {
-        attendanceBody.innerHTML = '<tr><td colspan="5" class="text-center">No attendance records found</td></tr>';
+        attendanceBody.innerHTML = '<tr><td colspan="7" class="text-center">No attendance records found</td></tr>';
     } else {
-        attendanceBody.innerHTML = allData.attendance.slice().reverse().map(record => `
-            <tr>
-                <td><strong>${record.name}</strong></td>
-                <td>${record.id}</td>
-                <td>${record.email}</td>
-                <td>${record.yearLevel || 'N/A'}</td>
-                <td>${formatDateTime(record.timestamp)}</td>
-            </tr>
-        `).join('');
+        attendanceBody.innerHTML = allData.attendance.slice().reverse().map(record => {
+            const meetingTypeBadge = record.meetingType && record.meetingType !== 'General Meeting'
+                ? `<span style="background: var(--primary-color); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 5px;">${record.meetingType}</span>`
+                : '';
+            const adminBadge = record.addedBy === 'Officer (Admin Mode)'
+                ? `<span style="background: var(--accent-color); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 5px;">⚙️ Admin Entry</span>`
+                : '';
+            const notesIcon = record.adminNotes && record.adminNotes.trim()
+                ? `<span style="cursor: help; margin-left: 5px;" title="${escapeHtml(record.adminNotes)}">📝</span>`
+                : '';
+            
+            return `
+                <tr>
+                    <td><strong>${record.name}</strong></td>
+                    <td>${record.id}</td>
+                    <td style="font-size: 0.9rem;">${record.email}</td>
+                    <td>${record.yearLevel || 'N/A'}</td>
+                    <td>${record.meetingType || 'General Meeting'}${meetingTypeBadge}</td>
+                    <td>${formatDateTime(record.timestamp)}${adminBadge}${notesIcon}</td>
+                </tr>
+            `;
+        }).join('');
     }
     
     // RSVPs table
@@ -313,6 +326,13 @@ function formatDateTime(timestamp) {
         hour: 'numeric',
         minute: '2-digit'
     });
+}
+
+// Escape HTML to prevent XSS
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 // Filter table

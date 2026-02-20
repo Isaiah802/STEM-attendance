@@ -216,8 +216,20 @@
     <section class="section">
         <div class="attendance-form-container">
             <div class="form-card" id="formCard">
-                <h2 class="text-center mb-2">Sign In Now</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h2 class="mb-0">Sign In Now</h2>
+                    <button type="button" id="adminModeToggle" class="btn btn-outline" style="padding: 8px 15px; font-size: 0.9rem;">⚙️ Admin Mode</button>
+                </div>
                 <p class="text-center text-light mb-3">All fields are required. Your data is encrypted and secure.</p>
+                
+                <!-- Admin Mode Panel -->
+                <div id="adminModePanel" style="display: none; background: rgba(52, 152, 219, 0.1); border-left: 4px solid var(--primary-color); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <span style="font-weight: bold; color: var(--primary-color);">🔐 Admin Mode Active</span>
+                        <button type="button" id="exitAdminMode" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.85rem; margin-left: auto;">Exit</button>
+                    </div>
+                    <p style="font-size: 0.9rem; margin-bottom: 0; color: var(--text-light);">You can now add attendance for past dates and customize meeting details.</p>
+                </div>
                 
                 <form id="attendanceForm">
                     <div class="form-group">
@@ -257,6 +269,43 @@
                             <option value="Graduate">Graduate</option>
                             <option value="Other">Other</option>
                         </select>
+                    </div>
+                    
+                    <!-- Admin Mode Fields -->
+                    <div id="adminFields" style="display: none;">
+                        <div class="form-group">
+                            <label for="attendanceDate">
+                                <strong>Date & Time</strong>
+                                <span style="color: #f44336;">*</span>
+                                <span style="font-size: 0.85rem; color: var(--text-light); font-weight: normal;">(Admin Mode)</span>
+                            </label>
+                            <input type="datetime-local" id="attendanceDate" placeholder="Select date and time">
+                            <small style="color: var(--text-light); font-size: 0.85rem; display: block; margin-top: 5px;">📅 Defaults to current time. Cannot be in the future.</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="meetingType">
+                                <strong>Meeting Type</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-light); font-weight: normal;">(Admin Mode)</span>
+                            </label>
+                            <select id="meetingType">
+                                <option value="General Meeting">General Meeting</option>
+                                <option value="Workshop">Workshop</option>
+                                <option value="Project Session">Project Session</option>
+                                <option value="Social Event">Social Event</option>
+                                <option value="Competition Prep">Competition Prep</option>
+                                <option value="Guest Speaker">Guest Speaker</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adminNotes">
+                                <strong>Admin Notes</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-light); font-weight: normal;">(Admin Mode, Optional)</span>
+                            </label>
+                            <textarea id="adminNotes" rows="2" placeholder="Additional notes about this attendance entry..." style="resize: vertical;"></textarea>
+                        </div>
                     </div>
                     
                     <div class="form-group">

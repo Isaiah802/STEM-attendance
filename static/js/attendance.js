@@ -1,5 +1,15 @@
 // Enhanced Attendance Page JavaScript
 let todaySignins = [];
+let adminMode = false;
+
+// Admin credentials (same as admin-secure.js)
+const ADMIN_CREDENTIALS = {
+    'president': 'stem2026pres',
+    'vicepresident': 'stem2026vp',
+    'treasurer': 'stem2026treas',
+    'secretary': 'stem2026sec',
+    'admin': 'stem2026admin'
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     if (window.db) {
@@ -9,7 +19,81 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Firebase not configured. Using demo mode.');
         loadDemoData();
     }
+
+    // Admin Mode Toggle Handler
+    const adminModeToggle = document.getElementById('adminModeToggle');
+    if (adminModeToggle) {
+        adminModeToggle.addEventListener('click', toggleAdminMode);
+    }
+
+    // Exit Admin Mode Handler
+    const exitAdminMode = document.getElementById('exitAdminMode');
+    if (exitAdminMode) {
+        exitAdminMode.addEventListener('click', deactivateAdminMode);
+    }
+
+    // Set max datetime to now (prevent future dates)
+    const dateInput = document.getElementById('attendanceDate');
+    if (dateInput) {
+        const now = new Date();
+        const maxDatetime = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+        dateInput.max = maxDatetime;
+    }
 });
+
+// Admin Mode Functions
+function toggleAdminMode() {
+    if (adminMode) {
+        // Already in admin mode, do nothing
+        return;
+    }
+
+    // Prompt for password
+    const password = prompt('🔐 Enter Admin Password:\n\nUse one of the officer credentials to enable Admin Mode.');
+    
+    if (!password) return;
+
+    // Check if password is valid
+    let isValid = false;
+    for (const [user, pass] of Object.entries(ADMIN_CREDENTIALS)) {
+        if (password === pass) {
+            isValid = true;
+            console.log(`Admin mode activated by: ${user}`);
+            break;
+        }
+    }
+
+    if (isValid) {
+        activateAdminMode();
+    } else {
+        alert('❌ Invalid password. Admin mode requires officer credentials.');
+    }
+}
+
+function activateAdminMode() {
+    adminMode = true;
+    document.getElementById('adminModePanel').style.display = 'block';
+    document.getElementById('adminFields').style.display = 'block';
+    document.getElementById('adminModeToggle').style.display = 'none';
+    
+    // Set default datetime to now
+    const dateInput = document.getElementById('attendanceDate');
+    const now = new Date();
+    const localDatetime = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+    dateInput.value = localDatetime;
+}
+
+function deactivateAdminMode() {
+    adminMode = false;
+    document.getElementById('adminModePanel').style.display = 'none';
+    document.getElementById('adminFields').style.display = 'none';
+    document.getElementById('adminModeToggle').style.display = 'inline-block';
+    
+    // Clear admin fields
+    document.getElementById('attendanceDate').value = '';
+    document.getElementById('meetingType').selectedIndex = 0;
+    document.getElementById('adminNotes').value = '';
+}
 
 // Attendance Form Handler
 const form = document.getElementById('attendanceForm');
@@ -23,8 +107,22 @@ if (form) {
         const yearLevel = document.getElementById('yearLevel').value;
         const consent = document.getElementById('privacyConsent').checked;
 
+        // Admin mode fields
+        const customDate = document.getElementById('attendanceDate').value;
+        const meetingType = document.getElementById('meetingType').value;
+        const adminNotes = document.getElementById('adminNotes').value.trim();
+
         // Validation
         if (!name || !id || !email) {
+    
+    // Restore admin mode if it was active
+    if (adminMode) {
+        const dateInput = document.getElementById('attendanceDate');
+        const now = new Date();
+        const localDatetime = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+        dateInput.value = localDatetime;
+        document.getElementById('meetingType').selectedIndex = 0;
+    }
             FirebaseUtils.showMessage('message', 'Please fill in all required fields', 'error');
             return;
         }
@@ -39,10 +137,26 @@ if (form) {
             return;
         }
 
-        try {
-            const timestamp = new Date().toISOString();
-            const date = new Date().toLocaleDateString();
+        // Determine timestamp
+        let timestamp, date;
+        if (adminMode && customDate) {
+            const customDateTime = new Date(customDate);
+            const now = new Date();
+            
+            // Validate not in future
+            if (customDateTime > now) {
+                FirebaseUtils.showMessage('message', 'Cannot add attendance for future dates', 'error');
+                return;
+            }
+            
+            timestamp = customDateTime.toISOString();
+            date = customDateTime.toLocaleDateString();
+        } else {
+            timestamp = new Date().toISOString();
+            date = new Date().toLocaleDateString();
+        }
 
+        try {
             // Hash email for privacy (basic obfuscation)
             const emailHash = btoa(email).substring(0, 10);
 
@@ -54,6 +168,9 @@ if (form) {
                 yearLevel: yearLevel || 'Not specified',
                 timestamp,
                 date,
+                meetingType: adminMode ? meetingType : 'General Meeting',
+                addedBy: adminMode ? 'Officer (Admin Mode)' : 'Self Sign-In',
+                adminNotes: adminMode && adminNotes ? adminNotes : '',
                 ipAddress: 'hidden', // Would need backend for real IP
                 userAgent: navigator.userAgent.substring(0, 50)
             };
@@ -69,6 +186,13 @@ if (form) {
                 // Reload recent sign-ins
                 loadTodayAttendance();
                 loadRecentSignins();
+
+                // If in admin mode, auto-reset for next entry after 2 seconds
+                if (adminMode) {
+                    setTimeout(() => {
+                        resetForm();
+                    }, 2000);
+                }
             } else {
                 FirebaseUtils.showMessage('message', 'Firebase not configured. Demo mode.', 'info');
             }
@@ -125,15 +249,21 @@ function loadRecentSignins() {
         snapshot.forEach(entry => {
             signins.unshift(entry.val());
         });
-        
-        if (signins.length === 0) {
-            container.innerHTML = '<p class="text-center text-light">No sign-ins yet today</p>';
-            return;
-        }
-        
-        signins.forEach((signin, index) => {
-            const initials = signin.name.split(' ').map(n => n[0]).join('').substring(0, 2);
-            const timeAgo = getTimeAgo(signin.timestamp);
+        const meetingBadge = signin.meetingType && signin.meetingType !== 'General Meeting' 
+                ? `<span style="background: var(--primary-color); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 8px;">${signin.meetingType}</span>` 
+                : '';
+            const adminBadge = signin.addedBy === 'Officer (Admin Mode)' 
+                ? `<span style="background: var(--accent-color); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 5px;">⚙️ Admin</span>` 
+                : '';
+            
+            const signinItem = document.createElement('div');
+            signinItem.className = 'signin-item';
+            signinItem.style.animationDelay = `${index * 0.05}s`;
+            signinItem.innerHTML = `
+                <div class="signin-info">
+                    <div class="signin-avatar">${initials}</div>
+                    <div>
+                        <strong>${signin.name}</strong>${meetingBadge}${adminBadge});
             
             const signinItem = document.createElement('div');
             signinItem.className = 'signin-item';
