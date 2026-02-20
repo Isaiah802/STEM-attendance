@@ -20,6 +20,11 @@ def index():
     """Main home page with attendance sign-in"""
     return render_template('index.html')
 
+@app.route('/attendance')
+def attendance():
+    """Dedicated attendance sign-in page"""
+    return render_template('attendance.html')
+
 @app.route('/about')
 def about():
     """About Us page - club info, mission, team"""

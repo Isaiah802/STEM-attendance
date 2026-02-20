@@ -17,6 +17,7 @@
             
             <ul class="nav-menu">
                 <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
+                <li><a href="{{ url_for('attendance') }}" class="nav-link" style="background: var(--accent-color); color: white; padding: 8px 16px; border-radius: 8px;">📋 Sign In</a></li>
                 <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
                 <li><a href="{{ url_for('events') }}" class="nav-link">Events</a></li>
                 <li><a href="{{ url_for('projects') }}" class="nav-link">Projects</a></li>
@@ -42,7 +43,7 @@
             <h1 class="fade-in">Welcome to STEM Club</h1>
             <p class="fade-in">Empowering students through Science, Technology, Engineering, and Mathematics</p>
             <div class="flex-center gap-2 flex-wrap">
-                <a href="#attendance" class="btn btn-primary">Sign In</a>
+                <a href="{{ url_for('attendance') }}" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 30px;">📋 Sign In to Meeting</a>
                 <a href="{{ url_for('events') }}" class="btn btn-outline">View Events</a>
             </div>
         </div>
@@ -93,34 +94,19 @@
         </div>
     </section>
 
-    <!-- Attendance Section -->
-    <section id="attendance" class="section">
-        <div class="container">
-            <div class="container-small">
-                <h2 class="text-center">Meeting Sign-In</h2>
-                <p class="text-center text-light mb-2">Record your attendance for today's meeting</p>
-                
-                <form id="attendanceForm">
-                    <div class="form-group">
-                        <label for="studentName">Full Name</label>
-                        <input type="text" id="studentName" placeholder="Enter your full name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="studentID">Student ID</label>
-                        <input type="text" id="studentID" placeholder="Enter your student ID" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="studentEmail">Email</label>
-                        <input type="email" id="studentEmail" placeholder="Enter your email" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
-                </form>
-                
-                <div id="message" style="display: none; margin-top: 15px;"></div>
-            </div>
+    <!-- Sign-In CTA Section -->
+    <section class="section" id="attendance" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);">
+        <div class="container text-center">
+            <h2 style="color: white;">📋 Meeting in Progress!</h2>
+            <p style="color: white; opacity: 0.95; font-size: 1.2rem; margin: 20px 0;">
+                Don't forget to sign in to today's meeting
+            </p>
+            <a href="{{ url_for('attendance') }}" class="btn" style="background: white; color: var(--primary-color); font-size: 1.2rem; padding: 15px 40px;">
+                Sign In Now →
+            </a>
+            <p style="color: white; opacity: 0.8; margin-top: 15px; font-size: 0.9rem;">
+                <strong>24</strong> members have already signed in today
+            </p>
         </div>
     </section>
 

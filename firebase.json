@@ -1,13 +1,14 @@
 {
   "hosting": {
-    "public": "templates",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
       "**/__pycache__/**",
       "**/*.py",
-      "venv/**"
+      "venv/**",
+      "templates/**"
     ],
     "rewrites": [
       {
