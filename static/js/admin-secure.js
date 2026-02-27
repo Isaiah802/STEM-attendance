@@ -530,9 +530,15 @@ function logAudit(action, details) {
         details,
         user: currentUser || 'anonymous'
     };
-    
     auditLog.unshift(entry);
-    
+
+    // Persist audit log entry to Firebase if available
+    if (window.db) {
+        window.db.ref('auditLogs').push(entry).catch(err => {
+            console.error('Failed to persist audit log:', err);
+        });
+    }
+
     // Update audit log display
     const logEl = document.getElementById('auditLog');
     if (logEl && auditLog.length > 0) {

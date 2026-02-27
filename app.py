@@ -4,6 +4,7 @@ A Flask-based web application for tracking student attendance with Firebase inte
 """
 
 from flask import Flask, render_template, jsonify, request
+import logging
 import os
 from dotenv import load_dotenv
 import json
@@ -11,8 +12,16 @@ import json
 # Load environment variables from .env file
 load_dotenv()
 
+
 # Initialize Flask app
 app = Flask(__name__)
+
+# Setup backend logging to a file
+logging.basicConfig(
+    filename='backend.log',
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+)
 
 # Configuration
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
@@ -94,11 +103,13 @@ def admin():
 @app.errorhandler(404)
 def not_found(error):
     """Custom 404 error handler"""
+    logging.warning(f"404 Not Found: {request.path}")
     return render_template('404.html'), 404
 
 @app.errorhandler(500)
 def internal_error(error):
     """Custom 500 error handler"""
+    logging.error(f"500 Internal Server Error: {request.path} | Exception: {error}")
     return jsonify({'error': 'Internal server error'}), 500
 
 # ==================== API ROUTES ====================

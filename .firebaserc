@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "stem-c0eca"
-  }
+    "default": "stem-c0eca",
+    "production": "stem-website-66af1"
+  },
+  "targets": {},
+  "etags": {}
 }

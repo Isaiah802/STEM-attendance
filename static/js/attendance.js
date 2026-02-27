@@ -236,7 +236,7 @@ function loadTodayAttendance() {
 // Load recent sign-ins (last 10)
 function loadRecentSignins() {
     const container = document.getElementById('recentSignins');
-    
+} 
     if (!window.db) {
         container.innerHTML = '<p class="text-center text-light">Demo mode - no live data</p>';
         return;
@@ -245,17 +245,18 @@ function loadRecentSignins() {
     window.db.ref('attendance').limitToLast(10).on('value', snapshot => {
         container.innerHTML = '';
         const signins = [];
-        
         snapshot.forEach(entry => {
             signins.unshift(entry.val());
         });
-        const meetingBadge = signin.meetingType && signin.meetingType !== 'General Meeting' 
-                ? `<span style="background: var(--primary-color); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 8px;">${signin.meetingType}</span>` 
+        signins.forEach((signin, index) => {
+            const initials = signin.name ? signin.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2) : '';
+            const meetingBadge = signin.meetingType && signin.meetingType !== 'General Meeting'
+                ? `<span style="background: var(--primary-color); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 8px;">${signin.meetingType}</span>`
                 : '';
-            const adminBadge = signin.addedBy === 'Officer (Admin Mode)' 
-                ? `<span style="background: var(--accent-color); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 5px;">⚙️ Admin</span>` 
+            const adminBadge = signin.addedBy === 'Officer (Admin Mode)'
+                ? `<span style="background: var(--accent-color); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 5px;">⚙️ Admin</span>`
                 : '';
-            
+            const timeAgo = getTimeAgo(signin.timestamp);
             const signinItem = document.createElement('div');
             signinItem.className = 'signin-item';
             signinItem.style.animationDelay = `${index * 0.05}s`;
@@ -263,16 +264,7 @@ function loadRecentSignins() {
                 <div class="signin-info">
                     <div class="signin-avatar">${initials}</div>
                     <div>
-                        <strong>${signin.name}</strong>${meetingBadge}${adminBadge});
-            
-            const signinItem = document.createElement('div');
-            signinItem.className = 'signin-item';
-            signinItem.style.animationDelay = `${index * 0.05}s`;
-            signinItem.innerHTML = `
-                <div class="signin-info">
-                    <div class="signin-avatar">${initials}</div>
-                    <div>
-                        <strong>${signin.name}</strong>
+                        <strong>${signin.name}</strong>${meetingBadge}${adminBadge}
                         <div class="text-light" style="font-size: 0.9rem;">${signin.yearLevel || 'Member'}</div>
                     </div>
                 </div>
