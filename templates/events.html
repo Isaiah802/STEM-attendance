@@ -204,6 +204,11 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
     
+    <!-- Firebase Configuration (injected from server environment variables) -->
+    <script>
+        window.firebaseConfig = {{ firebase_config_json|safe }};
+    </script>
+    
     <script src="{{ url_for('static', filename='js/firebase-config.js') }}"></script>
     <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
     <script>

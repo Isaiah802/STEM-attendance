@@ -5,6 +5,11 @@ A Flask-based web application for tracking student attendance with Firebase inte
 
 from flask import Flask, render_template, jsonify, request
 import os
+from dotenv import load_dotenv
+import json
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -12,6 +17,25 @@ app = Flask(__name__)
 # Configuration
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'True') == 'True'
+
+# Firebase configuration from environment variables
+FIREBASE_CONFIG = {
+    'apiKey': os.environ.get('FIREBASE_API_KEY', ''),
+    'authDomain': os.environ.get('FIREBASE_AUTH_DOMAIN', ''),
+    'databaseURL': os.environ.get('FIREBASE_DATABASE_URL', ''),
+    'projectId': os.environ.get('FIREBASE_PROJECT_ID', ''),
+    'storageBucket': os.environ.get('FIREBASE_STORAGE_BUCKET', ''),
+    'messagingSenderId': os.environ.get('FIREBASE_MESSAGING_SENDER_ID', ''),
+    'appId': os.environ.get('FIREBASE_APP_ID', ''),
+    'measurementId': os.environ.get('FIREBASE_MEASUREMENT_ID', '')
+}
+
+@app.context_processor
+def inject_firebase_config():
+    """Inject Firebase configuration into all templates"""
+    return {
+        'firebase_config_json': json.dumps(FIREBASE_CONFIG)
+    }
 
 # ==================== MAIN ROUTES ====================
 
