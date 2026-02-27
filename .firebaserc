@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "stem-c0eca",
+    "default": "stem-website-66af1",
     "production": "stem-website-66af1"
   },
   "targets": {},
